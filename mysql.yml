@@ -1,0 +1,8 @@
+options:
+  user:
+    name: User
+  password:
+    name: Password
+  socket: 
+    name: Socket
+    default: /var/run/mysqld/mysqld.sock
