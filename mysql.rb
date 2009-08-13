@@ -6,7 +6,7 @@ require 'set'
  
 class MysqlQueryStatisticsTriand < Scout::Plugin
   ENTRIES = %w(Com_insert Com_select Com_update Com_delete).to_set
-  # ENTRIES_SINGLE = %w(Connections Max_used_connections).to_set
+  ENTRIES_SINGLE = %w(Connections Max_used_connections).to_set
   
   needs "mysql"
 
