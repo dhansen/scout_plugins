@@ -4,7 +4,7 @@
 
 require 'set'
 
-class MysqlQueryStatistics < Scout::Plugin
+class MysqlQueryStatisticsTriand < Scout::Plugin
   ENTRIES = %w(Com_insert Com_select Com_update Com_delete Connections Max_used_connections).to_set
   
   needs "mysql"
