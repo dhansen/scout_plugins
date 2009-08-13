@@ -19,37 +19,3 @@ options:
     name: MySQL password
     default: frt
     
-
-
-metadata: 
-  delete: 
-    units: /sec
-    label: Delete Queries
-  replace: 
-    units: /sec
-    label: Replace Queries
-  insert: 
-    units: /sec
-    label: Insert Queries
-  total: 
-    units: /sec
-    label: Total Queries
-  update: 
-    units: /sec
-    label: Update Queries
-  select: 
-    units: /sec
-    label: Select Queries
-  Connections:
-    precision: 0
-  Max_used_connections:
-    label: Max Connections
-    precision: 0
-triggers: 
-- percentage_change: 30
-  type: trend
-  min_value: 0.0
-  window_reference: LAST_WEEK
-  dname: total
-  population_size: 0
-      direction: UP
