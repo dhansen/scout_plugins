@@ -1,8 +1,21 @@
 options:
+  
   user:
-    name: User
-  password:
-    name: Password
-  socket: 
-    name: Socket
+    name: MySQL username
+    default: root
+    
+  socket:
+    name: MySQL socket
     default: /var/run/mysqld/mysqld.sock
+
+
+  port:
+    name: MySQL port
+
+  host:
+    name: MySQL host
+    
+  password:
+    name: MySQL password
+    default: frt
+    
