@@ -28,6 +28,39 @@ class MemcachedMonitor < Scout::Plugin
 
   attr_accessor :connection  
   
+  OPTIONS = <<-HEREDOC
+options:
+  host:
+    name: Host
+    notes: The host to monitor
+    default: 127.0.0.1
+  port:
+    name: Port
+    notes: The port memcached is running on
+    default: 11211
+  key:
+    name: Key to use for testing
+    notes: This key will be both read and set 
+    default: memcached_monitor_key
+  timeout: 
+    name: Timeout
+    notes: maximum amount of time to wait for a response
+    default: 0.25
+  units:
+    name: sizes units for stats fields
+    notes: use either B, KB, MB, GB. Apply only to bytes, limit_maxbytes, bytes_read, bytes_written metrics
+    default: MB
+  metrics:
+    name: stats metrics to monitor
+    notes: see available metrics in http://code.sixapart.com/svn/memcached/trunk/server/doc/protocol.txt
+    default: cmd_get:get_count, cmd_set:set_count, get_misses, get_hits, curr_connections:current_connections, curr_items:total_items, bytes:current_data, limit_maxbytes:max_data
+  rates:
+    name: computed rates stats
+    notes: these values will be computed to expose per/second statistics
+    default: gets_per_sec, sets_per_sec, misses_per_sec, hits_per_sec  
+HEREDOC
+   
+  
   def setup_memcache
     begin
       require 'memcache'
@@ -39,10 +72,11 @@ class MemcachedMonitor < Scout::Plugin
         raise MissingLibrary, "could not load the memcache gem"
       end
     end
+    # puts "[#{option(:host)}:#{option(:port)}]  key[#{option(:key)}]"
     self.connection = MemCache.new("#{option(:host)}:#{option(:port)}")
   end
   
-  def build_report
+  def build_report(h={})
     begin
       setup_memcache
       test_setting_value
